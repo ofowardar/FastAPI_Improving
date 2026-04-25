@@ -1,7 +1,11 @@
 from fastapi import FastAPI
+from enum import Enum
 
 app = FastAPI()
 
+class IkametValue(Enum):
+    ISTANBUL = "İstanbul"
+    IZMIR = "İzmir"
 
 BANDS = [
     {'id':1 , 'name': 'Ömer Faruk Özvardar','İkamet' : "Aydın"},
@@ -36,8 +40,8 @@ def getbandbyid(band_id:int):
             
 
 @app.get("/bands/bands_byCity/{band_city}")
-def bands_byCity(band_city) -> list[dict]:
+def bands_byCity(band_city:IkametValue) -> list[dict]:
     return [
-        b for b in BANDS if b['İkamet'].lower() == band_city.lower()
+        b for b in BANDS if b['İkamet'].lower() == band_city.value.lower()
     ]
 
