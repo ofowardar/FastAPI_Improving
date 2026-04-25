@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from enum import Enum
 
+#API Kullanımı için bir ana App oluşturarak FastAPI kütüphanesindeki nesneyi örneklememiz gerekiyor.
 app = FastAPI()
 
+#ENUM'lar kullanılarak enum içindeki değer dışında entity girilirse tarama yapmadan hata döndürüyor ki bu da sistem performansını olumlu etkiler.
 class IkametValue(Enum):
     ISTANBUL = "İstanbul"
     IZMIR = "İzmir"
@@ -28,6 +30,7 @@ def root_check() -> dict[str,str]:
 def about() -> str:
     return 'Bu bir portföy sitesidir.'
 
+#Bir girdi ile endpoint bu şekilde oluşturulur.
 @app.get("/bands/{band_id}")
 def getbandbyid(band_id:int):
     finded_row = []
@@ -39,6 +42,7 @@ def getbandbyid(band_id:int):
     return {"Exception": "Non found band!"}
             
 
+#Entity gerektiren endpointte enum kullanımı.
 @app.get("/bands/bands_byCity/{band_city}")
 def bands_byCity(band_city:IkametValue) -> list[dict]:
     return [
