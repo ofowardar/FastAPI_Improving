@@ -5,6 +5,7 @@ from datetime import date
 class IkametValue(Enum):
     ISTANBUL = "İstanbul"
     IZMIR = "İzmir"
+    AYDIN = 'Aydın'
 
 
 
